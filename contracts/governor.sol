@@ -34,6 +34,8 @@ contract DTXgovernor {
 
 	address public constant rewardContract = ; //for referral rewards
 
+address public constant manageRewardsAddress = ; // buy oink contract
+
 address public constant helperToken = ;
     
     //addresses for time-locked deposits(autocompounding pools)
