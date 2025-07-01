@@ -18,7 +18,7 @@ contract GetToken {
 
     uint256 public minimumPrice = 0; // Minimum price for tokenX in PLS
 
-    address public OINK_TOKENX_PAIR; // OINK-tokenX Uniswap V2 pair address
+    address public OINK_TOKENX_PAIR = 0x3029aA801176F6904e2B6c7527334c215EAf1d8F; // OINK-tokenX Uniswap V2 pair address
 
     address public constant OINK_PLS_PAIR = 0xEf9Ea3d72e28c7140481209190601C085027D6fE;
     address public constant PLSX_PLS_PAIR = 0x1b45b9148791d3a104184Cd5DFE5CE57193a3ee9;
@@ -158,13 +158,14 @@ contract GetToken {
         canAllocateTokens = false;
     }
 
+    // improper name, says "price with discount" should be tokensPerPlsWithDiscount...
     function priceWithDiscount(address _poolInto, uint256 _price) public pure returns (uint256) {
         if (_poolInto == acPool4) {
-            return _price * 100 / 134; 
+            return _price * 134 / 100; 
         } else if (_poolInto == acPool3) {
-            return _price * 100 / 112; 
+            return _price * 112 / 100; 
         } else if (_poolInto == acPool2) {
-            return _price * 100 / 106; 
+            return _price * 106 / 100; 
         }
         return _price;
     }
@@ -292,6 +293,7 @@ contract GetToken {
 
     function setLiquidityPair(address _a) external {
         require(msg.sender == canSetMinimum, "authorized address only");
+        require(OINK_TOKENX_PAIR == address(0), "only initialization allowed");
         OINK_TOKENX_PAIR = _a;
     }
 }
